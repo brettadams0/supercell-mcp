@@ -1,9 +1,8 @@
 {
-  "name": "supercell-mcp",
+  "name": "@brettadams0/supercell-mcp",
   "version": "1.0.0",
-  "private": true,
   "type": "module",
-  "description": "Personal MCP server for Supercell game APIs (Clash of Clans, Clash Royale, Brawl Stars). Read-only stats, no messaging exists in these APIs.",
+  "description": "MCP server for the Clash of Clans, Clash Royale and Brawl Stars APIs",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
@@ -12,5 +11,39 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
     "zod": "^3.23.8"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "claude",
+    "clash-of-clans",
+    "clash-royale",
+    "brawl-stars",
+    "supercell"
+  ],
+  "license": "MIT",
+  "author": "Brett Adams",
+  "bin": {
+    "supercell-mcp": "src/index.js"
+  },
+  "files": [
+    "src",
+    "scripts",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brettadams0/supercell-mcp.git"
+  },
+  "homepage": "https://github.com/brettadams0/supercell-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/brettadams0/supercell-mcp/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
