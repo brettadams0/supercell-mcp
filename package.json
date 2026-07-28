@@ -1,0 +1,15 @@
+{
+  "name": "supercell-mcp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal MCP server for Supercell game APIs (Clash of Clans, Clash Royale, Brawl Stars). Read-only stats, no messaging exists in these APIs.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.23.8"
+  }
+}

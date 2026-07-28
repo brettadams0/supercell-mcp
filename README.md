@@ -1,0 +1,64 @@
+# supercell-mcp
+
+One MCP server covering three Supercell game APIs — Clash of Clans, Clash Royale,
+and Brawl Stars. They share an auth model and response style, so a single server
+with prefixed tool names beats three near-identical ones.
+
+Read-only. These APIs expose no write or messaging endpoints at all, so there is
+nothing here that can change game state.
+
+Runs over stdio, registered in `~/.claude.json` as `supercell`.
+
+## Tools
+
+Prefixes: `coc_` Clash of Clans, `cr_` Clash Royale, `bs_` Brawl Stars.
+
+| Clash of Clans | Clash Royale | Brawl Stars |
+|---|---|---|
+| `coc_get_player` | `cr_get_player` | `bs_get_player` |
+| `coc_get_clan` | `cr_get_clan` | `bs_get_club` |
+| `coc_get_clan_members` | `cr_get_clan_members` | `bs_get_club_members` |
+| `coc_search_clans` | `cr_search_clans` | `bs_get_rankings` |
+| `coc_get_current_war` | `cr_get_player_battlelog` | `bs_get_player_battlelog` |
+
+## Layout
+
+```
+src/client.js        shared auth + fetch, one base URL per game
+src/clashofclans.js  coc_* tools
+src/clashroyale.js   cr_* tools
+src/brawlstars.js    bs_* tools
+src/index.js         McpServer construction + stdio transport
+```
+
+## The IP allowlist gotcha
+
+Supercell API keys are **bound to the IP address** they were created for. When
+the home IP changes, every call starts returning `403 accessDenied` even though
+the key is perfectly valid and unexpired.
+
+That failure mode looks like an auth bug and isn't one. To fix it, mint a new key
+for the current IP at the relevant developer portal:
+
+- https://developer.clashofclans.com
+- https://developer.clashroyale.com
+- https://developer.brawlstars.com
+
+Check the current public IP with `curl -s https://api.ipify.org` (already an
+allowed command in `~/.claude/settings.json`).
+
+## Running it
+
+```bash
+npm ci
+npm start
+```
+
+Keys live in `credentials/`, which is gitignored.
+
+## Notes
+
+- Player and clan tags start with `#` (e.g. `#2PP0JCVL`). The `#` is URL-encoded
+  before the request — pass tags with the `#` included.
+- Tags are unambiguous across games but not portable between them; a Clash Royale
+  tag won't resolve against the Clash of Clans API.
