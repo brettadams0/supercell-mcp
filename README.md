@@ -47,14 +47,36 @@ for the current IP at the relevant developer portal:
 Check the current public IP with `curl -s https://api.ipify.org` (already an
 allowed command in `~/.claude/settings.json`).
 
-## Running it
+## Setup
+
+Requires Node 20+. Mint a key per game at the portal listed above, for your
+current public IP, then save each one as `credentials/<game>.json`:
+
+```
+credentials/clashofclans.json
+credentials/clashroyale.json
+credentials/brawlstars.json
+```
+
+Each holds `{"token": "..."}` — see the matching `*.example.json`.
+`credentials/` is git-ignored. A game whose key file is absent simply fails on
+first call with a message naming the file and its portal; the other games keep
+working.
 
 ```bash
 npm ci
 npm start
+claude mcp add supercell -- node <path>/supercell-mcp/src/index.js
 ```
 
-Keys live in `credentials/`, which is gitignored.
+## Tests
+
+```bash
+npm test
+```
+
+Registration across all three games, tag encoding, and the missing-key error
+message. No network and no credentials.
 
 ## Notes
 

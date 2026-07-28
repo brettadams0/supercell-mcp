@@ -6,7 +6,8 @@
   "description": "Personal MCP server for Supercell game APIs (Clash of Clans, Clash Royale, Brawl Stars). Read-only stats, no messaging exists in these APIs.",
   "main": "src/index.js",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "test": "node --test test/tools.test.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.0",
