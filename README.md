@@ -1,5 +1,9 @@
 # supercell-mcp
 
+[![CI](https://github.com/brettadams0/supercell-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/brettadams0/supercell-mcp/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%E2%89%A520-brightgreen.svg)](package.json)
+
 One MCP server covering three Supercell game APIs — Clash of Clans, Clash Royale,
 and Brawl Stars. They share an auth model and response style, so a single server
 with prefixed tool names beats three near-identical ones.
