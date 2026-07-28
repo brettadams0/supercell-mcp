@@ -13,19 +13,6 @@ nothing here that can change game state.
 
 Runs over stdio, registered in `~/.claude.json` as `supercell`.
 
-## Install
-
-```bash
-claude mcp add supercell -- npx -y @brettadams0/supercell-mcp
-```
-
-You also need a per-game API key in `credentials/` (see Setup).
-
-Published as [`@brettadams0/supercell-mcp`](https://www.npmjs.com/package/@brettadams0/supercell-mcp).
-The scope is there because the unscoped name was already taken on npm by an
-unrelated package. Cloning this repo and pointing `claude mcp add` at
-`src/index.js` works identically.
-
 ## Tools
 
 Prefixes: `coc_` Clash of Clans, `cr_` Clash Royale, `bs_` Brawl Stars.

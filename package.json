@@ -1,5 +1,5 @@
 {
-  "name": "@brettadams0/supercell-mcp",
+  "name": "supercell-mcp",
   "version": "1.0.0",
   "type": "module",
   "description": "MCP server for the Clash of Clans, Clash Royale and Brawl Stars APIs",
@@ -43,7 +43,5 @@
   "bugs": {
     "url": "https://github.com/brettadams0/supercell-mcp/issues"
   },
-  "publishConfig": {
-    "access": "public"
-  }
+  "private": true
 }
