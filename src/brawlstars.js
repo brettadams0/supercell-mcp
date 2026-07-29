@@ -18,13 +18,13 @@ const tagFor = (what) =>
 export function registerBrawlStarsTools(server) {
   server.registerTool(
     'bs_get_player',
-    { title: 'Get Brawl Stars player', description: 'Full stats for a player by tag.', inputSchema: { tag: tagFor('Player') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: 'Get Brawl Stars player', description: 'Full stats for a player by tag.', inputSchema: { tag: tagFor('Player') } },
     async ({ tag }) => json(await get(`/players/${encodeTag(tag)}`))
   );
 
   server.registerTool(
     'bs_get_player_battlelog',
-    { title: "Get a player's recent battles", description: 'Recent battle history for a player.', inputSchema: { tag: tagFor('Player') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: "Get a player's recent battles", description: 'Recent battle history for a player.', inputSchema: { tag: tagFor('Player') } },
     async ({ tag }) => json(await get(`/players/${encodeTag(tag)}/battlelog`))
   );
 
@@ -32,6 +32,7 @@ export function registerBrawlStarsTools(server) {
     'bs_get_club',
     {
       title: 'Get Brawl Stars club',
+      annotations: { readOnlyHint: true, openWorldHint: true },
       description: "Full details for a club (Brawl Stars' equivalent of a clan) by tag.",
       inputSchema: { tag: tagFor('Club') },
     },
@@ -40,7 +41,7 @@ export function registerBrawlStarsTools(server) {
 
   server.registerTool(
     'bs_get_club_members',
-    { title: 'Get club member list', description: 'Member roster for a club.', inputSchema: { tag: tagFor('Club') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: 'Get club member list', description: 'Member roster for a club.', inputSchema: { tag: tagFor('Club') } },
     async ({ tag }) => json(await get(`/clubs/${encodeTag(tag)}/members`))
   );
 
@@ -48,6 +49,7 @@ export function registerBrawlStarsTools(server) {
     'bs_get_rankings',
     {
       title: 'Get player or club rankings',
+      annotations: { readOnlyHint: true, openWorldHint: true },
       description: 'Leaderboard rankings by country code ("global" for worldwide).',
       inputSchema: {
         countryCode: z

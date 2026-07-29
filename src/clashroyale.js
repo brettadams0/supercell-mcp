@@ -18,25 +18,25 @@ const tagFor = (what) =>
 export function registerClashRoyaleTools(server) {
   server.registerTool(
     'cr_get_player',
-    { title: 'Get Clash Royale player', description: 'Full stats for a player by tag.', inputSchema: { tag: tagFor('Player') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: 'Get Clash Royale player', description: 'Full stats for a player by tag.', inputSchema: { tag: tagFor('Player') } },
     async ({ tag }) => json(await get(`/players/${encodeTag(tag)}`))
   );
 
   server.registerTool(
     'cr_get_player_battlelog',
-    { title: "Get a player's recent battles", description: 'Recent battle history for a player.', inputSchema: { tag: tagFor('Player') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: "Get a player's recent battles", description: 'Recent battle history for a player.', inputSchema: { tag: tagFor('Player') } },
     async ({ tag }) => json(await get(`/players/${encodeTag(tag)}/battlelog`))
   );
 
   server.registerTool(
     'cr_get_clan',
-    { title: 'Get Clash Royale clan', description: 'Full details for a clan by tag.', inputSchema: { tag: tagFor('Clan') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: 'Get Clash Royale clan', description: 'Full details for a clan by tag.', inputSchema: { tag: tagFor('Clan') } },
     async ({ tag }) => json(await get(`/clans/${encodeTag(tag)}`))
   );
 
   server.registerTool(
     'cr_get_clan_members',
-    { title: 'Get clan member list', description: 'Member roster for a clan.', inputSchema: { tag: tagFor('Clan') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: 'Get clan member list', description: 'Member roster for a clan.', inputSchema: { tag: tagFor('Clan') } },
     async ({ tag }) => json(await get(`/clans/${encodeTag(tag)}/members`))
   );
 
@@ -44,6 +44,7 @@ export function registerClashRoyaleTools(server) {
     'cr_search_clans',
     {
       title: 'Search clans',
+      annotations: { readOnlyHint: true, openWorldHint: true },
       description: 'Search for clans by name and/or filters.',
       inputSchema: {
         name: z.string().optional().describe('Clan name or partial name to search for. Minimum 3 characters.'),

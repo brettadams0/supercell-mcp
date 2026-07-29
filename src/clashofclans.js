@@ -22,6 +22,7 @@ export function registerClashOfClansTools(server) {
     'coc_get_player',
     {
       title: 'Get Clash of Clans player',
+      annotations: { readOnlyHint: true, openWorldHint: true },
       description: 'Full stats for a player by tag (with or without leading #).',
       inputSchema: { tag: tagFor('Player') },
     },
@@ -30,13 +31,13 @@ export function registerClashOfClansTools(server) {
 
   server.registerTool(
     'coc_get_clan',
-    { title: 'Get Clash of Clans clan', description: 'Full details for a clan by tag.', inputSchema: { tag: tagFor('Clan') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: 'Get Clash of Clans clan', description: 'Full details for a clan by tag.', inputSchema: { tag: tagFor('Clan') } },
     async ({ tag }) => json(await get(`/clans/${encodeTag(tag)}`))
   );
 
   server.registerTool(
     'coc_get_clan_members',
-    { title: 'Get clan member list', description: 'Member roster for a clan.', inputSchema: { tag: tagFor('Clan') } },
+    { annotations: { readOnlyHint: true, openWorldHint: true }, title: 'Get clan member list', description: 'Member roster for a clan.', inputSchema: { tag: tagFor('Clan') } },
     async ({ tag }) => json(await get(`/clans/${encodeTag(tag)}/members`))
   );
 
@@ -44,6 +45,7 @@ export function registerClashOfClansTools(server) {
     'coc_get_current_war',
     {
       title: 'Get current war',
+      annotations: { readOnlyHint: true, openWorldHint: true },
       description: "A clan's current war status (if public / not in private war log).",
       inputSchema: { tag: tagFor('Clan') },
     },
@@ -54,6 +56,7 @@ export function registerClashOfClansTools(server) {
     'coc_search_clans',
     {
       title: 'Search clans',
+      annotations: { readOnlyHint: true, openWorldHint: true },
       description: 'Search for clans by name and/or filters.',
       inputSchema: {
         name: z.string().optional().describe('Clan name or partial name to search for. Minimum 3 characters.'),
