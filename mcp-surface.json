@@ -1,0 +1,365 @@
+{
+  "capabilities": [
+    "tools"
+  ],
+  "prompts": [],
+  "resources": [],
+  "server": {
+    "name": "supercell",
+    "version": "1.1.0"
+  },
+  "snapshotVersion": 1,
+  "tools": [
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Full details for a club (Brawl Stars' equivalent of a clan) by tag.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Club tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "bs_get_club"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Member roster for a club.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Club tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "bs_get_club_members"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Full stats for a player by tag.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Player tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "bs_get_player"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Recent battle history for a player.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Player tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "bs_get_player_battlelog"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Leaderboard rankings by country code (\"global\" for worldwide).",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "countryCode": {
+            "default": "global",
+            "description": "Two-letter ISO 3166-1 alpha-2 country code (e.g. \"CA\", \"US\"), or \"global\" for worldwide. Defaults to \"global\".",
+            "type": "string"
+          },
+          "type": {
+            "default": "players",
+            "description": "Which leaderboard to return. Defaults to \"players\".",
+            "enum": [
+              "players",
+              "clubs"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "bs_get_rankings"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Full details for a clan by tag.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Clan tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "coc_get_clan"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Member roster for a clan.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Clan tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "coc_get_clan_members"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "A clan's current war status (if public / not in private war log).",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Clan tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "coc_get_current_war"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Full stats for a player by tag (with or without leading #).",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Player tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "coc_get_player"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Search for clans by name and/or filters.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "description": "Maximum clans to return, 1-50. Defaults to 20.",
+            "maximum": 50,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "minMembers": {
+            "description": "Only return clans with at least this many members (1-50).",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Clan name or partial name to search for. Minimum 3 characters.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "coc_search_clans"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Full details for a clan by tag.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Clan tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "cr_get_clan"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Member roster for a clan.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Clan tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "cr_get_clan_members"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Full stats for a player by tag.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Player tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "cr_get_player"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Recent battle history for a player.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "tag": {
+            "description": "Player tag, e.g. \"#2PP0JCCLY\". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tag"
+        ],
+        "type": "object"
+      },
+      "name": "cr_get_player_battlelog"
+    },
+    {
+      "annotations": {
+        "openWorldHint": true,
+        "readOnlyHint": true
+      },
+      "description": "Search for clans by name and/or filters.",
+      "inputSchema": {
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "description": "Maximum clans to return, 1-50. Defaults to 20.",
+            "maximum": 50,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "minMembers": {
+            "description": "Only return clans with at least this many members (1-50).",
+            "type": "integer"
+          },
+          "name": {
+            "description": "Clan name or partial name to search for. Minimum 3 characters.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "name": "cr_search_clans"
+    }
+  ]
+}

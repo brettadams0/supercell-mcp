@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import { makeClient, encodeTag } from './client.js';
+import { json } from './shared.js';
 
-const get = makeClient('coc', 'https://api.clashofclans.com/v1', 'https://developer.clashofclans.com');
+const get = makeClient('clashofclans', 'https://api.clashofclans.com/v1', 'https://developer.clashofclans.com');
 
-function json(data) {
-  return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] };
-}
+export { get as client };
 
 // Supercell tags use a restricted alphabet that contains no letter O — every
 // round character is a zero. Transcribing one as "O" is the single most common
@@ -14,7 +13,7 @@ const tagFor = (what) =>
   z
     .string()
     .describe(
-      `${what} tag, e.g. "#2PP0JCCLY". The leading # is optional. Uppercase. Note the alphabet has no letter O — any round character is the digit zero.`
+      `${what} tag, e.g. "#2PP0JCCLY". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.`
     );
 
 export function registerClashOfClansTools(server) {
