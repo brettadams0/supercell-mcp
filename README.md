@@ -100,13 +100,13 @@ Or in Claude Desktop's `claude_desktop_config.json`:
 ## The credentials file nobody could have created
 
 Until 1.1.0, the Clash of Clans client read `credentials/coc.json`, while this
-README, the tracked example file and the error's own setup instructions all said
-`clashofclans.json`. Following the documentation exactly produced a server
+README and the tracked example file said `clashofclans.json`. Following the
+documentation exactly produced a server
 whose Clash of Clans tools could never succeed — and every test passed, because
 the mismatch only surfaces at call time, on the user's machine, with real
 credentials.
 
-The name is fixed, and each game's client now exposes the file it reads, so a
+The name is fixed (an existing `coc.json` is still read, so working installs keep working), and each game's client now exposes the file it reads, so a
 test holds it to the tracked `*.example.json` beside it. Renaming one without
 the other fails CI.
 

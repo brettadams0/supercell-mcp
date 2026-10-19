@@ -14,11 +14,15 @@ const tokenCache = new Map();
 // time. If your home IP changes (dynamic IP from your ISP), calls start
 // failing with 403 until you regenerate the key for your new IP at the
 // relevant developer portal.
-async function loadToken(filePath, portalUrl) {
+async function loadToken(filePath, portalUrl, legacyPath) {
   if (tokenCache.has(filePath)) return tokenCache.get(filePath);
-  const raw = await readFile(filePath, 'utf-8').catch(() => {
+  const missing = () => {
     throw new Error(`Missing ${filePath}. Create it with {"token": "..."} from ${portalUrl} (key must be whitelisted for your current public IP).`);
-  });
+  };
+  // An install set up before the file was renamed still has the old name.
+  const raw = await readFile(filePath, 'utf-8').catch(() =>
+    legacyPath ? readFile(legacyPath, 'utf-8').catch(missing) : missing()
+  );
   const { token } = JSON.parse(raw);
   tokenCache.set(filePath, token);
   return token;
@@ -33,7 +37,7 @@ async function loadToken(filePath, portalUrl) {
 export async function forbiddenError(res, label, portalUrl) {
   const body = await res.json().catch(() => ({}));
   if (String(body.reason ?? '').includes('invalidIp')) {
-    const ip = String(body.message ?? '').match(/\d{1,3}(?:\.\d{1,3}){3}|[0-9a-f:]{3,}:[0-9a-f:]+/i)?.[0];
+    const ip = String(body.message ?? '').match(/(?:::ffff:)?\d{1,3}(?:\.\d{1,3}){3}|[0-9a-f:]{3,}:[0-9a-f:]+/i)?.[0];
     return new Error(
       `${label} refused the key: it is not allowed from ${ip ? `IP ${ip}` : 'this IP'}. Keys are bound to the IP they were created for — mint one for ${ip ?? 'your current public IP'} at ${portalUrl}.`
     );
@@ -47,12 +51,13 @@ export async function forbiddenError(res, label, portalUrl) {
  * documented name — a mismatch there fails only at call time, on the user's
  * machine.
  */
-export function makeClient(game, baseUrl, portalUrl) {
+export function makeClient(game, baseUrl, portalUrl, { legacyName } = {}) {
   const credentialsFile = path.join(CREDENTIALS_DIR, `${game}.json`);
+  const legacyFile = legacyName && path.join(CREDENTIALS_DIR, `${legacyName}.json`);
   const label = `${GAME_NAMES[game] ?? game} API`;
 
   async function get(pathname, query) {
-    const token = await loadToken(credentialsFile, portalUrl);
+    const token = await loadToken(credentialsFile, portalUrl, legacyFile);
     const url = new URL(`${baseUrl}${pathname}`);
     if (query) {
       for (const [key, value] of Object.entries(query)) {

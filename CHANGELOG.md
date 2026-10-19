@@ -10,9 +10,10 @@ recorded in [`mcp-surface.json`](mcp-surface.json).
 ### Fixed
 
 - **Clash of Clans could not be configured as documented.** Its client read
-  `credentials/coc.json`, while the README, the example file and the error
-  message all said `clashofclans.json`. A test now holds every game's
-  credentials file to its tracked example.
+  `credentials/coc.json`, while the README and the example file said
+  `clashofclans.json`. It now reads `clashofclans.json`, and still picks up an
+  existing `coc.json`. A test holds every game's credentials file to its
+  tracked example.
 - A 403 now says whether the key is wrong or used from the wrong IP, and in the
   second case names the IP Supercell saw — the value the developer portal asks
   for. It used to blame the IP for every 403.

@@ -2,7 +2,10 @@ import { z } from 'zod';
 import { makeClient, encodeTag } from './client.js';
 import { json } from './shared.js';
 
-const get = makeClient('clashofclans', 'https://api.clashofclans.com/v1', 'https://developer.clashofclans.com');
+// Read as coc.json until 1.1.0; an existing coc.json is still picked up.
+const get = makeClient('clashofclans', 'https://api.clashofclans.com/v1', 'https://developer.clashofclans.com', {
+  legacyName: 'coc',
+});
 
 export { get as client };
 

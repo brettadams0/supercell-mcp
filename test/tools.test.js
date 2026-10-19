@@ -145,6 +145,15 @@ test('a 403 for the wrong IP names the IP Supercell saw', async () => {
   assert.match(err.message, /mint one for 203\.0\.113\.7 at https:\/\/developer\.clashofclans\.com/);
 });
 
+test('a 403 names an IPv4-mapped IPv6 address in full', async () => {
+  const res = new Response(
+    JSON.stringify({ reason: 'accessDenied.invalidIp', message: 'API key does not allow access from IP ::ffff:203.0.113.7' }),
+    { status: 403 }
+  );
+  const err = await forbiddenError(res, 'clashofclans API', 'https://developer.clashofclans.com');
+  assert.match(err.message, /mint one for ::ffff:203\.0\.113\.7 at/);
+});
+
 test('a 403 for a bad key does not blame the IP', async () => {
   const res = new Response(JSON.stringify({ reason: 'accessDenied', message: 'Invalid authorization' }), { status: 403 });
   const err = await forbiddenError(res, 'clashroyale API', 'https://developer.clashroyale.com');
