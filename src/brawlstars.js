@@ -1,18 +1,17 @@
 import { z } from 'zod';
-import { makeClient, encodeTag } from './client.js';
+import { countryCode as checkCountryCode, makeClient, encodeTag } from './client.js';
+import { json } from './shared.js';
 
 const get = makeClient('brawlstars', 'https://api.brawlstars.com/v1', 'https://developer.brawlstars.com');
 
-function json(data) {
-  return { content: [{ type: 'text', text: JSON.stringify(data, null, 2) }] };
-}
+export { get as client };
 
 // See the note in clashofclans.js — Supercell tags contain no letter O.
 const tagFor = (what) =>
   z
     .string()
     .describe(
-      `${what} tag, e.g. "#2PP0JCCLY". The leading # is optional. Uppercase. Note the alphabet has no letter O — any round character is the digit zero.`
+      `${what} tag, e.g. "#2PP0JCCLY". The leading # is optional. The alphabet has no letter O — any round character is the digit zero.`
     );
 
 export function registerBrawlStarsTools(server) {
@@ -59,6 +58,6 @@ export function registerBrawlStarsTools(server) {
         type: z.enum(['players', 'clubs']).default('players').describe('Which leaderboard to return. Defaults to "players".'),
       },
     },
-    async ({ countryCode, type }) => json(await get(`/rankings/${countryCode}/${type}`))
+    async ({ countryCode, type }) => json(await get(`/rankings/${checkCountryCode(countryCode)}/${type}`))
   );
 }
